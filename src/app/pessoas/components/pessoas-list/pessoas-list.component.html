@@ -1,0 +1,99 @@
+<mat-table [dataSource]="pessoas">
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Nome </th>
+    <td mat-cell *matCellDef="let pessoa"> {{ pessoa.name }} </td>
+  </ng-container>
+
+  <!-- CPF/CNPJ Column -->
+  <ng-container matColumnDef="cpfCnpj">
+    <th mat-header-cell *matHeaderCellDef> CPF/CNPJ</th>
+    <td mat-cell *matCellDef="let pessoa"> {{ pessoa.cpfCnpj }} </td>
+  </ng-container>
+
+  <!-- telefone Column -->
+  <ng-container matColumnDef="telefone">
+    <th mat-header-cell *matHeaderCellDef> Telefone </th>
+    <td mat-cell *matCellDef="let pessoa"> {{ pessoa.telefone }} </td>
+  </ng-container>
+
+  <!-- email Column -->
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef> E-mail </th>
+    <td mat-cell *matCellDef="let pessoa"> {{ pessoa.email }} </td>
+  </ng-container>
+
+  <!-- endereco Column -->
+  <ng-container matColumnDef="endereco">
+    <th mat-header-cell *matHeaderCellDef> Endereço </th>
+    <td mat-cell *matCellDef="let pessoa"> {{ pessoa.endereco }} </td>
+  </ng-container>
+
+  <!-- numeroEndereco Column -->
+  <ng-container matColumnDef="numeroEndereco">
+    <th mat-header-cell *matHeaderCellDef> Número </th>
+    <td mat-cell *matCellDef="let pessoa"> {{ pessoa.numeroEndereco }} </td>
+  </ng-container>
+
+  <!-- bairro Column -->
+  <ng-container matColumnDef="bairro">
+    <th mat-header-cell *matHeaderCellDef> Bairro </th>
+    <td mat-cell *matCellDef="let pessoa"> {{ pessoa.bairro }} </td>
+  </ng-container>
+
+  <!-- cep Column -->
+  <ng-container matColumnDef="cep">
+    <th mat-header-cell *matHeaderCellDef> CEP </th>
+    <td mat-cell *matCellDef="let pessoa"> {{ pessoa.cep }} </td>
+  </ng-container>
+
+  <!-- cep Column -->
+  <ng-container matColumnDef="cidade">
+    <th mat-header-cell *matHeaderCellDef> Cidade </th>
+    <td mat-cell *matCellDef="let pessoa"> {{ pessoa.cidade }} </td>
+  </ng-container>
+
+  <!-- cep Column -->
+  <ng-container matColumnDef="uf">
+    <th mat-header-cell *matHeaderCellDef> UF </th>
+    <td mat-cell *matCellDef="let pessoa"> {{ pessoa.uf }} </td>
+  </ng-container>
+
+  <!-- Actions Column -->
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef class="action-column">
+      <button
+        mat-mini-fab
+        color="accent"
+        aria-label="Adicionar uma pessoa"
+        (click)="onAdd()"
+        class="action-column-header"
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+    </mat-header-cell>
+
+    <mat-cell *matCellDef="let pessoa" class="action-column">
+      <button
+        mat-icon-button
+        color="primary"
+        aria-label="Editar Pessoa"
+        (click)="onEdit(pessoa)"
+      >
+        <mat-icon>edit</mat-icon>
+      </button>
+
+      <button
+        mat-icon-button
+        color="warn"
+        aria-label="Remover Pessoa"
+        (click)="onDelete(pessoa)"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+</mat-table>
