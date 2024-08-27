@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import com.example.demo.PessoaPageDTO;
 import lombok.AllArgsConstructor;
 import com.example.demo.PessoaDTO;
 import com.example.demo.entities.Pessoa;
@@ -13,9 +14,16 @@ import java.net.URI;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/pessoas")
+@CrossOrigin(origins = "http://localhost:4200")
 public class PessoaController {
 
     private final PessoaService pessoaService;
+
+    @GetMapping
+    public PessoaPageDTO list(@RequestParam(defaultValue = "0") int page,
+                              @RequestParam(defaultValue = "10") int pageSize) {
+        return pessoaService.buscarTodos(page, pageSize);
+    }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Pessoa> buscarPorId(@PathVariable Integer id) {

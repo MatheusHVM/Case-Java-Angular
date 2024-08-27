@@ -28,7 +28,7 @@ public class Pessoa {
     @Column(name = "endereco", nullable = false, length = 100)
     private String endereco;
 
-    @Column(name = "numero_end", nullable = false, length = 10)
+    @Column(name = "numero_End", nullable = false, length = 10)
     private String numero_end;
 
     @Column(name = "bairro", nullable = false, length = 45)
@@ -57,7 +57,7 @@ public class Pessoa {
     }
 
     @ManyToOne
-    @JoinColumn(name = "cidade_id")
+    @JoinColumn(name = "cidade_Id")
     private Cidade cidade;
 
 }
