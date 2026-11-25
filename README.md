@@ -1,27 +1,38 @@
-# CrudAngular
+# Java and Angular Case Study
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.2.
+A people-registration case study split across two branches in this repository.
 
-## Development server
+| Branch | Code | Stack |
+| --- | --- | --- |
+| `main` | People list and registration form | Angular 17, Angular Material, TypeScript |
+| [`master`](https://github.com/MatheusHVM/Case-Java-Angular/tree/master) | REST API in `case/` | Java 17, Spring Boot 3.3, Spring Data JPA, MySQL |
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+The Angular interface implements a paginated list and create, edit and delete actions. The Java API provides those operations under `/pessoas`, with additional create, read by ID, update and delete operations under `/cidades`.
 
-## Code scaffolding
+## Run the API
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Use separate checkouts so both branches are available at once.
 
-## Build
+```sh
+git clone --branch master https://github.com/MatheusHVM/Case-Java-Angular.git case-backend
+cd case-backend/case
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Create an empty local MySQL database and set `SPRING_DATASOURCE_URL`, `SPRING_DATASOURCE_USERNAME` and `SPRING_DATASOURCE_PASSWORD` in your shell. For a disposable local database, set `SPRING_JPA_HIBERNATE_DDL_AUTO=update` to have Hibernate create the mapped tables. Run `./mvnw spring-boot:run` or `.\mvnw.cmd spring-boot:run` on Windows. Test pagination at `http://localhost:8080/pessoas?page=0&pageSize=10`. Creating a person through the API requires a valid `cidadeId` for an existing city.
 
-## Running unit tests
+## Run the frontend
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+From a separate directory, with Node.js and npm installed:
 
-## Running end-to-end tests
+```sh
+git clone --branch main https://github.com/MatheusHVM/Case-Java-Angular.git case-frontend
+cd case-frontend
+npm ci
+npm start
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Open `http://localhost:4200`. The service calls `http://localhost:8080/pessoas` directly, and the API allows the Angular origin. Use `npm run build` for a production build and `npm test` for the Karma suite.
 
-## Further help
+## Integration status
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+The Angular model uses `_id`, `name`, `cidade` and `uf`. The Java API returns `id` and `nome` and expects `cidadeId` when saving a person. The frontend and API need a shared data contract for the people form and list to work together end to end.
